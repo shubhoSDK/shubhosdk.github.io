@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shubhodeep Kundu — Data Analyst & Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:     #09090b;
+  --bg2:    #111116;
+  --card:   #16161c;
+  --card2:  #1c1c24;
+  --border: rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.13);
+  --ink:    #f2f0ea;
+  --ink2:   #9d9baf;
+  --ink3:   #55536a;
+  --gold:   #c9a84c;
+  --gold2:  #e8c97a;
+  --teal:   #2dd4b4;
+  --blue:   #60a5fa;
+  --pink:   #f472b6;
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Sora', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 60px;
+  background: rgba(9,9,11,0.85);
+  backdrop-filter: blur(14px);
+  border-bottom: 0.5px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 18px;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 36px; }
+.nav-links a {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 120px 60px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; }
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero h1 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: clamp(48px, 7vw, 88px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.35s forwards;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+.hero-sub {
+  font-size: 17px;
+  color: var(--ink2);
+  max-width: 560px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.5s forwards;
+}
+.hero-ctas {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.65s forwards;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px;
+  background: var(--gold);
+  color: #09090b;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-primary:hover { background: var(--gold2); transform: translateY(-1px); }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px;
+  border: 0.5px solid var(--border2);
+  color: var(--ink2);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+.hero-stats {
+  display: flex; gap: 48px;
+  margin-top: 80px;
+  padding-top: 40px;
+  border-top: 0.5px solid var(--border);
+  opacity: 0;
+  animation: fadeUp 0.8s 0.8s forwards;
+}
+.stat-num {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--gold);
+}
+.stat-lbl {
+  font-size: 11px;
+  color: var(--ink3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* ── SECTIONS ── */
+section { padding: 100px 60px; }
+.section-inner { max-width: 1100px; margin: 0 auto; }
+.section-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Libre Baskerville', serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 56px;
+  line-height: 1.2;
+}
+.section-title span { color: var(--gold); font-style: italic; }
+
+/* ── ABOUT ── */
+#about { background: var(--bg2); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.about-text p {
+  color: var(--ink2);
+  line-height: 1.85;
+  margin-bottom: 20px;
+}
+.about-text p strong { color: var(--ink); font-weight: 500; }
+.about-aside {}
+.aside-block {
+  background: var(--card);
+  border: 0.5px solid var(--border2);
+  border-radius: 10px;
+  padding: 24px 28px;
+  margin-bottom: 16px;
+}
+.aside-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.aside-block a {
+  display: block;
+  font-size: 13px;
+  color: var(--ink2);
+  text-decoration: none;
+  padding: 4px 0;
+  transition: color 0.2s;
+}
+.aside-block a:hover { color: var(--teal); }
+
+/* ── SKILLS ── */
+#skills { background: var(--bg); }
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.skill-card {
+  background: var(--card);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 28px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.skill-card:hover { border-color: var(--border2); transform: translateY(-3px); }
+.skill-card:hover::before { opacity: 1; }
+.skill-icon { font-size: 24px; margin-bottom: 14px; }
+.skill-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+}
+.skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 3px;
+  background: var(--card2);
+  color: var(--ink3);
+  border: 0.5px solid var(--border);
+}
+
+/* ── EXPERIENCE ── */
+#experience { background: var(--bg2); }
+.timeline { position: relative; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 8px; bottom: 0;
+  width: 0.5px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+}
+.tl-item {
+  padding-left: 40px;
+  padding-bottom: 56px;
+  position: relative;
+}
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -4px; top: 8px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 12px rgba(201,168,76,0.5);
+}
+.tl-period {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+.tl-role {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.tl-company {
+  font-size: 13px;
+  color: var(--ink3);
+  margin-bottom: 18px;
+}
+.tl-bullets { list-style: none; }
+.tl-bullets li {
+  font-size: 14px;
+  color: var(--ink2);
+  padding: 5px 0;
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.7;
+}
+.tl-bullets li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size: 11px;
+  top: 7px;
+}
+
+/* ── PROJECTS ── */
+#projects { background: var(--bg); }
+.projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.project-card {
+  background: var(--card);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.project-card::after {
+  content: '↗';
+  position: absolute;
+  top: 24px; right: 24px;
+  font-size: 18px;
+  color: var(--ink3);
+  transition: all 0.3s;
+}
+.project-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+.project-card:hover::after { color: var(--gold); transform: translate(3px,-3px); }
+.project-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.project-title {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 20px;
+  color: var(--ink);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.project-desc {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.75;
+  margin-bottom: 24px;
+}
+.project-metrics {
+  display: flex; gap: 20px;
+  padding-top: 20px;
+  border-top: 0.5px solid var(--border);
+}
+.pm { text-align: center; }
+.pm-val {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold);
+}
+.pm-lbl { font-size: 10px; color: var(--ink3); margin-top: 2px; }
+.project-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+
+/* ── CERTIFICATIONS ── */
+#certifications { background: var(--bg2); }
+.certs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.cert-card {
+  background: var(--card);
+  border: 0.5px solid var(--border);
+  border-radius: 9px;
+  padding: 22px 24px;
+  transition: all 0.25s;
+}
+.cert-card:hover { border-color: var(--border2); }
+.cert-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+.cert-issuer { font-size: 11px; color: var(--gold); font-family: 'DM Mono', monospace; }
+.cert-id { font-size: 10px; color: var(--ink3); margin-top: 4px; }
+
+/* ── CONTACT ── */
+#contact {
+  background: var(--bg);
+  text-align: center;
+  padding: 120px 60px;
+}
+#contact .section-inner { max-width: 600px; }
+#contact .section-title { margin-bottom: 16px; }
+#contact p { color: var(--ink2); margin-bottom: 48px; font-size: 16px; }
+.contact-links {
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+  margin-top: 48px;
+}
+.contact-link {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--ink3);
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 0.5px solid var(--border);
+  border-radius: 5px;
+  transition: all 0.2s;
+  letter-spacing: 0.05em;
+}
+.contact-link:hover { color: var(--gold); border-color: var(--gold); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 28px 60px;
+  border-top: 0.5px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer p { font-size: 11px; color: var(--ink3); font-family: 'DM Mono', monospace; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">SK</a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#certifications">Certs</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">// Data Analyst & Engineer — Noida, India</p>
+    <h1>Turning <em>messy data</em><br>into clear decisions.</h1>
+    <p class="hero-sub">6+ years building data pipelines, compliance analytics, and ML-grade datasets at Amazon. Now engineering end-to-end solutions with Python, SQL, Power BI, and AWS.</p>
+    <div class="hero-ctas">
+      <a href="https://shubhosdk.github.io/Instagram_Analytics_Dashboard/IG_Dashboard_A4.html" target="_blank" class="btn-primary">↗ View Live Dashboard</a>
+      <a href="#projects" class="btn-outline">See Projects</a>
+      <a href="Shubhodeep_Kundu_Profile.docx" download class="btn-outline">↓ Download Resume</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">6+</div>
+        <div class="stat-lbl">Years experience</div>
+      </div>
+      <div>
+        <div class="stat-num">1M+</div>
+        <div class="stat-lbl">Data points handled</div>
+      </div>
+      <div>
+        <div class="stat-num">5</div>
+        <div class="stat-lbl">Certifications</div>
+      </div>
+      <div>
+        <div class="stat-num">2</div>
+        <div class="stat-lbl">Portfolio projects</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-tag reveal">// About me</p>
+    <h2 class="section-title reveal">Data professional.<br><span>Amazon alumni.</span></h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm a data analyst and aspiring data engineer with over <strong>6 years of experience</strong> at the intersection of compliance, machine learning operations, and business intelligence — primarily at Amazon India.</p>
+        <p>My work has ranged from investigating suppressed ASIN compliance tickets across global marketplaces using <strong>SQL and Redshift</strong>, to cleaning and categorising large-scale datasets for Amazon's ML training pipelines.</p>
+        <p>More recently I've been building portfolio projects that go end-to-end — raw messy Excel data, Python cleaning pipelines, validated CSVs, and interactive dashboards hosted on GitHub Pages. I believe <strong>clean data is a prerequisite for any insight</strong>, not an afterthought.</p>
+        <p>I hold a B.Tech in Electrical Engineering and have completed certifications in Python, SQL, Power BI, Excel, and Data Engineering fundamentals through Codebasics.</p>
+      </div>
+      <div class="about-aside reveal">
+        <div class="aside-block">
+          <div class="aside-label">// Quick links</div>
+          <a href="https://linkedin.com/in/shubhodeepkundu-981a28402" target="_blank">↗ LinkedIn Profile</a>
+          <a href="https://github.com/shubhoSDK" target="_blank">↗ GitHub — shubhoSDK</a>
+          <a href="https://shubhosdk.github.io/Instagram_Analytics_Dashboard/IG_Dashboard_A4.html" target="_blank">↗ Instagram Analytics Dashboard</a>
+          <a href="https://shubhosdk.github.io/Instagram_Analytics_Dashboard/LMS_Dashboard_A4.html" target="_blank">↗ LMS Enrollment Dashboard</a>
+        </div>
+        <div class="aside-block">
+          <div class="aside-label">// Currently</div>
+          <a href="#">📍 Noida, Uttar Pradesh, India</a>
+          <a href="#">🎯 Open to Data Analyst / Data Engineer roles</a>
+          <a href="#">📧 Shubhodeep.kundu2@gmail.com</a>
+          <a href="#">📱 +91 9839371744</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-tag reveal">// Technical skills</p>
+    <h2 class="section-title reveal">What I work <span>with.</span></h2>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon">🐍</div>
+        <div class="skill-name">Python</div>
+        <div class="skill-tags">
+          <span class="tag">pandas</span><span class="tag">NumPy</span><span class="tag">Pydantic</span>
+          <span class="tag">FastAPI</span><span class="tag">geonamescache</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🗄️</div>
+        <div class="skill-name">SQL & Databases</div>
+        <div class="skill-tags">
+          <span class="tag">MySQL</span><span class="tag">Amazon Redshift</span><span class="tag">Advanced queries</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📊</div>
+        <div class="skill-name">BI & Visualisation</div>
+        <div class="skill-tags">
+          <span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">QuickSight</span>
+          <span class="tag">Tableau</span><span class="tag">Chart.js</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">☁️</div>
+        <div class="skill-name">Cloud & ETL</div>
+        <div class="skill-tags">
+          <span class="tag">AWS S3</span><span class="tag">Glue</span><span class="tag">Lambda</span>
+          <span class="tag">Athena</span><span class="tag">Redshift</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📝</div>
+        <div class="skill-name">Excel & Reporting</div>
+        <div class="skill-tags">
+          <span class="tag">Advanced Excel</span><span class="tag">VBA-Macros</span><span class="tag">Lookups</span>
+          <span class="tag">Pivot Tables</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🛠️</div>
+        <div class="skill-name">Tools & Workflow</div>
+        <div class="skill-tags">
+          <span class="tag">GitHub</span><span class="tag">GitHub Pages</span><span class="tag">HTML/CSS</span>
+          <span class="tag">Data Cleaning</span><span class="tag">SOP Writing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-tag reveal">// Professional experience</p>
+    <h2 class="section-title reveal">Where I've <span>worked.</span></h2>
+    <div class="timeline">
+
+      <div class="tl-item reveal">
+        <div class="tl-period">Jul 2024 – Jul 2025</div>
+        <div class="tl-role">Sr. Product Compliance Data Associate</div>
+        <div class="tl-company">Amazon India · Noida</div>
+        <ul class="tl-bullets">
+          <li>Investigated and resolved compliance tickets for suppressed ASINs, managing batches of 1,000+ data points across global marketplaces with near-zero error rates.</li>
+          <li>Executed deep-dive analyses using SQL (Redshift) and QuickSight to identify anomalies and restore data integrity at scale.</li>
+          <li>Streamlined cross-functional workflows aligning operations with global regulatory standards; reduced average ticket resolution time.</li>
+          <li>Reviewed SOPs and mentored junior analysts, improving team throughput and data quality benchmarks.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-period">Apr 2021 – May 2023</div>
+        <div class="tl-role">ML Data Associate</div>
+        <div class="tl-company">Amazon India · Noida</div>
+        <ul class="tl-bullets">
+          <li>Categorised, cleaned, and processed large-scale datasets to train ML models, maintaining high accuracy across complex classification queues.</li>
+          <li>Monitored data pipelines for errors and generated daily/weekly productivity metrics reports for senior management.</li>
+          <li>Delivered UX improvement feedback to engineering teams, reducing processing times on complex classification workflows.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-period">Oct 2016 – Apr 2019</div>
+        <div class="tl-role">Technical Analyst</div>
+        <div class="tl-company">Maintec Technologies · India</div>
+        <ul class="tl-bullets">
+          <li>Managed end-to-end technical support and ticket resolution for corporate clients against internal SLAs.</li>
+          <li>Maintained technical documentation, asset inventories, and system performance logs to minimise operational downtime.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <p class="section-tag reveal">// Portfolio projects</p>
+    <h2 class="section-title reveal">Things I've <span>built.</span></h2>
+    <div class="projects-grid">
+
+      <a href="https://shubhosdk.github.io/Instagram_Analytics_Dashboard/IG_Dashboard_A4.html" target="_blank" class="project-card reveal">
+        <div class="project-tag">// Analytics · Python · Chart.js</div>
+        <div class="project-title">Instagram Analytics Dashboard</div>
+        <div class="project-desc">End-to-end data cleaning and analysis of 6 brand accounts across 668 posts, 866 conversions, and 60 campaigns. Uncovered that Tier 3 city audiences had 36% higher purchase intent than Metro — a key geo-targeting insight.</div>
+        <div class="project-metrics">
+          <div class="pm"><div class="pm-val">668</div><div class="pm-lbl">Posts cleaned</div></div>
+          <div class="pm"><div class="pm-val">55</div><div class="pm-lbl">Issues removed</div></div>
+          <div class="pm"><div class="pm-val">11M</div><div class="pm-lbl">Reach analysed</div></div>
+        </div>
+        <div class="project-stack">
+          <span class="tag">Python</span><span class="tag">pandas</span><span class="tag">Chart.js</span>
+          <span class="tag">GitHub Pages</span><span class="tag">Power BI</span>
+        </div>
+      </a>
+
+      <a href="https://shubhosdk.github.io/Instagram_Analytics_Dashboard/LMS_Dashboard_A4.html" target="_blank" class="project-card reveal">
+        <div class="project-tag">// Data Engineering · geonamescache</div>
+        <div class="project-title">LMS Enrollment Data Pipeline</div>
+        <div class="project-desc">Validated 2,277 city-country pairs using a geographic database, flagged mismatches, and revealed that 79% of learners were freshers — repositioning the platform's marketing narrative entirely.</div>
+        <div class="project-metrics">
+          <div class="pm"><div class="pm-val">2,277</div><div class="pm-lbl">Records cleaned</div></div>
+          <div class="pm"><div class="pm-val">97.9%</div><div class="pm-lbl">Validated pairs</div></div>
+          <div class="pm"><div class="pm-val">26</div><div class="pm-lbl">Countries</div></div>
+        </div>
+        <div class="project-stack">
+          <span class="tag">Python</span><span class="tag">geonamescache</span><span class="tag">pandas</span>
+          <span class="tag">Power BI</span><span class="tag">Chart.js</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-inner">
+    <p class="section-tag reveal">// Certifications</p>
+    <h2 class="section-title reveal">What I've <span>earned.</span></h2>
+    <div class="certs-grid">
+      <div class="cert-card reveal">
+        <div class="cert-name">Data Engineering Basics for Data Analysts</div>
+        <div class="cert-issuer">Codebasics · May 2026</div>
+        <div class="cert-id">CB-103-348440</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-name">Python: Beginner to Advanced for Data Professionals</div>
+        <div class="cert-issuer">Codebasics</div>
+        <div class="cert-id">CB-48-348440</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-name">SQL: Beginner to Advanced for Data Professionals</div>
+        <div class="cert-issuer">Codebasics</div>
+        <div class="cert-id">CB-50-348440</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-name">Get Job Ready: Power BI Data Analytics 3.0</div>
+        <div class="cert-issuer">Codebasics</div>
+        <div class="cert-id">CB-49-348440</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-name">Excel: Beginner to Advanced for Data Professionals</div>
+        <div class="cert-issuer">Codebasics</div>
+        <div class="cert-id">CB-51-348440</div>
+      </div>
+      <div class="cert-card reveal" style="background:transparent;border-style:dashed;display:flex;align-items:center;justify-content:center;">
+        <div style="text-align:center;color:var(--ink3)">
+          <div style="font-size:24px;margin-bottom:8px">+</div>
+          <div style="font-size:12px;font-family:'DM Mono',monospace">More in progress</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-tag reveal">// Get in touch</p>
+    <h2 class="section-title reveal">Let's work <span>together.</span></h2>
+    <p class="reveal">Open to Data Analyst and Data Engineer roles. If you have an interesting problem involving messy data, pipelines, or dashboards — I'd love to hear about it.</p>
+    <a href="mailto:Shubhodeep.kundu2@gmail.com" class="btn-primary reveal">Send me an email ↗</a>
+    <div class="contact-links reveal">
+      <a href="https://linkedin.com/in/shubhodeepkundu-981a28402" target="_blank" class="contact-link">↗ LinkedIn</a>
+      <a href="https://github.com/shubhoSDK" target="_blank" class="contact-link">↗ GitHub</a>
+      <a href="Shubhodeep_Kundu_Profile.docx" download class="contact-link">↓ Resume</a>
+      <a href="tel:+919839371744" class="contact-link">📱 +91 98393 71744</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Shubhodeep Kundu</p>
+  <p>Built with HTML · CSS · JS · Hosted on GitHub Pages</p>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 60);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Active nav
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (scrollY >= s.offsetTop - 120) cur = s.id; });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--gold)' : '';
+  });
+});
+</script>
+</body>
+</html>
