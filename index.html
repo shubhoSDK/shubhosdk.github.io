@@ -165,6 +165,7 @@ nav {
   border-top: 0.5px solid var(--border);
   opacity: 0;
   animation: fadeUp 0.8s 0.8s forwards;
+  flex-wrap: wrap;
 }
 .stat-num {
   font-family: 'Libre Baskerville', serif;
@@ -361,6 +362,7 @@ section { padding: 100px 60px; }
   position: relative;
   overflow: hidden;
 }
+.project-card.featured { grid-column: 1 / -1; }
 .project-card::after {
   content: '↗';
   position: absolute;
@@ -396,6 +398,7 @@ section { padding: 100px 60px; }
   display: flex; gap: 20px;
   padding-top: 20px;
   border-top: 0.5px solid var(--border);
+  flex-wrap: wrap;
 }
 .pm { text-align: center; }
 .pm-val {
@@ -406,6 +409,23 @@ section { padding: 100px 60px; }
 }
 .pm-lbl { font-size: 10px; color: var(--ink3); margin-top: 2px; }
 .project-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+.project-bullets { list-style: none; margin-top: 20px; padding-top: 20px; border-top: 0.5px solid var(--border); }
+.project-bullets li {
+  font-size: 13px;
+  color: var(--ink2);
+  padding: 6px 0;
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.7;
+}
+.project-bullets li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size: 11px;
+  top: 8px;
+}
 
 /* ── CERTIFICATIONS ── */
 #certifications { background: var(--bg2); }
@@ -479,6 +499,11 @@ footer p { font-size: 11px; color: var(--ink3); font-family: 'DM Mono', monospac
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+@media (max-width: 800px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  .project-card.featured { grid-column: auto; }
+}
 </style>
 </head>
 <body>
@@ -501,7 +526,7 @@ footer p { font-size: 11px; color: var(--ink3); font-family: 'DM Mono', monospac
   <div class="hero-inner">
     <p class="hero-eyebrow">// Data Analyst & Engineer — Noida, India</p>
     <h1>Turning <em>messy data</em><br>into clear decisions.</h1>
-    <p class="hero-sub">6+ years building data pipelines, compliance analytics, and ML-grade datasets at Amazon. Now engineering end-to-end solutions with Python, SQL, Power BI, and AWS.</p>
+    <p class="hero-sub">4+ years building data pipelines, compliance analytics, and ML-grade datasets at Amazon. Now engineering end-to-end solutions with Python, SQL, Power BI, and AWS.</p>
     <div class="hero-ctas">
       <a href="https://shubhosdk.github.io/Instagram_Analytics_Dashboard/IG_Dashboard_A4.html" target="_blank" class="btn-primary">↗ View Live Dashboard</a>
       <a href="#projects" class="btn-outline">See Projects</a>
@@ -509,11 +534,11 @@ footer p { font-size: 11px; color: var(--ink3); font-family: 'DM Mono', monospac
     </div>
     <div class="hero-stats">
       <div>
-        <div class="stat-num">6+</div>
+        <div class="stat-num">4+</div>
         <div class="stat-lbl">Years experience</div>
       </div>
       <div>
-        <div class="stat-num">1M+</div>
+        <div class="stat-num">2.7M+</div>
         <div class="stat-lbl">Data points handled</div>
       </div>
       <div>
@@ -521,7 +546,7 @@ footer p { font-size: 11px; color: var(--ink3); font-family: 'DM Mono', monospac
         <div class="stat-lbl">Certifications</div>
       </div>
       <div>
-        <div class="stat-num">2</div>
+        <div class="stat-num">3</div>
         <div class="stat-lbl">Portfolio projects</div>
       </div>
     </div>
@@ -535,7 +560,7 @@ footer p { font-size: 11px; color: var(--ink3); font-family: 'DM Mono', monospac
     <h2 class="section-title reveal">Data professional.<br><span>Amazon alumni.</span></h2>
     <div class="about-grid">
       <div class="about-text reveal">
-        <p>I'm a data analyst and aspiring data engineer with over <strong>6 years of experience</strong> at the intersection of compliance, machine learning operations, and business intelligence — primarily at Amazon India.</p>
+        <p>I'm a data analyst and aspiring data engineer with over <strong>4 years of experience</strong> at the intersection of compliance, machine learning operations, and business intelligence — primarily at Amazon India.</p>
         <p>My work has ranged from investigating suppressed ASIN compliance tickets across global marketplaces using <strong>SQL and Redshift</strong>, to cleaning and categorising large-scale datasets for Amazon's ML training pipelines.</p>
         <p>More recently I've been building portfolio projects that go end-to-end — raw messy Excel data, Python cleaning pipelines, validated CSVs, and interactive dashboards hosted on GitHub Pages. I believe <strong>clean data is a prerequisite for any insight</strong>, not an afterthought.</p>
         <p>I hold a B.Tech in Electrical Engineering and have completed certifications in Python, SQL, Power BI, Excel, and Data Engineering fundamentals through Codebasics.</p>
@@ -547,6 +572,7 @@ footer p { font-size: 11px; color: var(--ink3); font-family: 'DM Mono', monospac
           <a href="https://github.com/shubhoSDK" target="_blank">↗ GitHub — shubhoSDK</a>
           <a href="https://shubhosdk.github.io/Instagram_Analytics_Dashboard/IG_Dashboard_A4.html" target="_blank">↗ Instagram Analytics Dashboard</a>
           <a href="https://shubhosdk.github.io/Instagram_Analytics_Dashboard/LMS_Dashboard_A4.html" target="_blank">↗ LMS Enrollment Dashboard</a>
+          <a href="https://shubhosdk.github.io/ShopVista-E-Commerce-Analytics-End-to-End-Data-Engineering-Pipeline/shopvista_bi_dashboard.html" target="_blank">↗ ShopVista Lakehouse Pipeline</a>
         </div>
         <div class="aside-block">
           <div class="aside-label">// Currently</div>
@@ -571,7 +597,7 @@ footer p { font-size: 11px; color: var(--ink3); font-family: 'DM Mono', monospac
         <div class="skill-name">Python</div>
         <div class="skill-tags">
           <span class="tag">pandas</span><span class="tag">NumPy</span><span class="tag">Pydantic</span>
-          <span class="tag">FastAPI</span><span class="tag">geonamescache</span>
+          <span class="tag">FastAPI</span><span class="tag">PySpark</span>
         </div>
       </div>
       <div class="skill-card reveal">
@@ -594,7 +620,7 @@ footer p { font-size: 11px; color: var(--ink3); font-family: 'DM Mono', monospac
         <div class="skill-name">Cloud & ETL</div>
         <div class="skill-tags">
           <span class="tag">AWS S3</span><span class="tag">Glue</span><span class="tag">Lambda</span>
-          <span class="tag">Athena</span><span class="tag">Redshift</span>
+          <span class="tag">Athena</span><span class="tag">Azure Databricks</span>
         </div>
       </div>
       <div class="skill-card reveal">
@@ -648,7 +674,7 @@ footer p { font-size: 11px; color: var(--ink3); font-family: 'DM Mono', monospac
       </div>
 
       <div class="tl-item reveal">
-        <div class="tl-period">Oct 2016 – Apr 2019</div>
+        <div class="tl-period">Oct 2016 – Apr 2017</div>
         <div class="tl-role">Technical Analyst</div>
         <div class="tl-company">Maintec Technologies · India</div>
         <ul class="tl-bullets">
@@ -667,6 +693,27 @@ footer p { font-size: 11px; color: var(--ink3); font-family: 'DM Mono', monospac
     <p class="section-tag reveal">// Portfolio projects</p>
     <h2 class="section-title reveal">Things I've <span>built.</span></h2>
     <div class="projects-grid">
+
+      <a href="https://shubhosdk.github.io/ShopVista-E-Commerce-Analytics-End-to-End-Data-Engineering-Pipeline/shopvista_bi_dashboard.html" target="_blank" class="project-card featured reveal">
+        <div class="project-tag">// Data Engineering · PySpark · Azure Databricks · Power BI</div>
+        <div class="project-title">ShopVista — Production Lakehouse Pipeline & Analytics Dashboard</div>
+        <div class="project-desc">An end-to-end medallion architecture (Bronze → Silver → Gold) ETL pipeline on Azure Databricks for a 7-country e-commerce platform, feeding a 2-page Power BI dashboard covering revenue, retention, and returns KPIs.</div>
+        <div class="project-metrics">
+          <div class="pm"><div class="pm-val">1.9M</div><div class="pm-lbl">Daily order rows</div></div>
+          <div class="pm"><div class="pm-val">812K</div><div class="pm-lbl">Shipment records</div></div>
+          <div class="pm"><div class="pm-val">₹14.02bn</div><div class="pm-lbl">Net revenue</div></div>
+          <div class="pm"><div class="pm-val">80.9%</div><div class="pm-lbl">Repeat customers</div></div>
+        </div>
+        <ul class="project-bullets">
+          <li>Used medallion architecture (Bronze → Silver → Gold) ETL pipeline on Azure Databricks processing 1.9M daily order rows (730 files), 812,705 shipment records, and 24,604 returns across 2 years of data for a 7-country e-commerce platform.</li>
+          <li>Engineered PySpark data quality transforms across dimension tables (300K+ customers, 50K+ products) — deduplication, null handling, type normalization, and category standardization — feeding analytics-ready Gold Delta tables.</li>
+          <li>Designed a 2-page Power BI dashboard surfacing ₹14.02bn net revenue, 80.9% repeat customer rate, 93.4% within-policy return rate, and carrier/geo KPIs across slicers for country, brand, category, and date range.</li>
+        </ul>
+        <div class="project-stack">
+          <span class="tag">PySpark</span><span class="tag">Azure Databricks</span><span class="tag">Delta Lake</span>
+          <span class="tag">Power BI</span><span class="tag">SQL</span>
+        </div>
+      </a>
 
       <a href="https://shubhosdk.github.io/Instagram_Analytics_Dashboard/IG_Dashboard_A4.html" target="_blank" class="project-card reveal">
         <div class="project-tag">// Analytics · Python · Chart.js</div>
